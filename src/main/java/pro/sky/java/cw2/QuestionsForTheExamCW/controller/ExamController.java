@@ -19,6 +19,6 @@ public class ExamController {
 
     @GetMapping
     Collection<Question> getQuestions(@RequestParam(name = "amount", required = false) int amount) {
-        return null;
+        return examinerService.getQuestions(amount);
     }
 }

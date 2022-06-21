@@ -1,0 +1,35 @@
+GET http://localhost:8080//exam/java/add?question=who&answer=I
+
+###
+
+GET http://localhost:8080//exam/java/add?question=who?&answer=I!
+
+###
+
+GET http://localhost:8080//exam/java/add?question=who??&answer=I!!
+
+###
+
+GET http://localhost:8080//exam/java/add?question=who???&answer=I!!!
+
+###
+
+GET http://localhost:8080//exam/java/
+
+###
+
+GET http://localhost:8080//exam/java/remove?question=who&answer=I
+
+###
+
+GET http://localhost:8080//exam/java/
+
+###
+
+GET http://localhost:8080//exam/java/remove?question=who&answer=I
+
+###
+
+GET http://localhost:8080//?amount=2
+
+###
