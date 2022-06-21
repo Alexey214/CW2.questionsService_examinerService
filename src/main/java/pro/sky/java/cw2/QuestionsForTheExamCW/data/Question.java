@@ -34,9 +34,8 @@ public class Question {
 
     @Override
     public String toString() {
-        return "Question{" +
-                "question='" + question + '\'' +
-                ", answer='" + answer + '\'' +
-                '}';
+        return "Результат: " +
+                ", вопрос - " + question +
+                ", ответ - " + answer + ";\n";
     }
 }

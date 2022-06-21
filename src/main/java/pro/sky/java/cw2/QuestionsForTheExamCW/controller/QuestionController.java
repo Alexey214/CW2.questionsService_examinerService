@@ -5,34 +5,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.cw2.QuestionsForTheExamCW.data.Question;
+import pro.sky.java.cw2.QuestionsForTheExamCW.exception.*;
 import pro.sky.java.cw2.QuestionsForTheExamCW.service.QuestionService;
 
 import java.util.Collection;
 
 @RestController
 @RequestMapping(path = "/exam/java")
-public class JavaQuestionController {
+public class QuestionController {
 
     private final QuestionService questionService;
 
-    public JavaQuestionController(QuestionService questionService) {
+    public QuestionController(QuestionService questionService) {
         this.questionService = questionService;
     }
 
     @GetMapping
     Collection<Question> getQuestions() {
-        return null;
+        return questionService.getAll();
     }
 
     @GetMapping(path = "/add")
     Question addQuestion(@RequestParam(name = "question", required = false) String question,
                          @RequestParam(name = "answer", required = false) String answer) {
-        return null;
+        Question questionTmp = questionService.add(question, answer);
+        Question questionException = new Question("ОШИБКА", "ОШИБКА");
+        if (questionTmp.equals(questionException)) {
+            throw new BadRequest();
+        } else {
+            return questionTmp;
+        }
     }
 
     @GetMapping(path = "/remove")
     Question removeQuestion(@RequestParam(name = "question", required = false) String question,
                             @RequestParam(name = "answer", required = false) String answer) {
-        return null;
+        Question questionTmp = new Question(question, answer);
+        Question questionException = new Question("ОШИБКА", "ОШИБКА");
+        if (question == "" && answer == "" || questionService.remove(questionTmp).equals(questionException)) {
+            throw new NotFound();
+        } else {
+            return questionTmp;
+        }
     }
 }
