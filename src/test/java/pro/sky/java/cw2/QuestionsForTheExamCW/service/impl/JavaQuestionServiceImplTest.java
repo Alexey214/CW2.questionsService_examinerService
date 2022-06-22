@@ -2,14 +2,17 @@ package pro.sky.java.cw2.QuestionsForTheExamCW.service.impl;
 
 import org.junit.jupiter.api.Test;
 import pro.sky.java.cw2.QuestionsForTheExamCW.data.Question;
+import pro.sky.java.cw2.QuestionsForTheExamCW.repository.QuestionRepository;
+import pro.sky.java.cw2.QuestionsForTheExamCW.repository.impl.JavaQuestionRepository;
 import pro.sky.java.cw2.QuestionsForTheExamCW.service.QuestionService;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static pro.sky.java.cw2.QuestionsForTheExamCW.constants.Constants.*;
 
-class QuestionServiceImplTest {
+class JavaQuestionServiceImplTest {
 
-    private final QuestionService out = new QuestionServiceImpl();
+    private final QuestionRepository out = new JavaQuestionRepository();
+    private final QuestionService out1 = new JavaQuestionServiceImpl(out);
 
     @Test
     void addCorrectRequest() {
@@ -60,12 +63,12 @@ class QuestionServiceImplTest {
     void getRandomQuestionCorrectRequest() {
         out.add(STRING_DEFAULT_CORRECT_ARGUMENT_1, STRING_DEFAULT_CORRECT_ARGUMENT_2);
         out.add(STRING_DEFAULT_CORRECT_ARGUMENT_1 + 1, STRING_DEFAULT_CORRECT_ARGUMENT_2 + 1);
-        assertTrue(out.getAll().contains(out.getRandomQuestion()));
+        assertTrue(out.getAll().contains(out1.getRandomQuestion()));
     }
 
     @Test
     void getRandomQuestionNotCorrectRequest() {
-        Question result = out.getRandomQuestion();
+        Question result = out1.getRandomQuestion();
         assertEquals(QUESTION_EXCEPTION, result);
     }
 }

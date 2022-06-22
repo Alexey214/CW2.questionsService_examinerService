@@ -6,18 +6,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.cw2.QuestionsForTheExamCW.data.Question;
-import pro.sky.java.cw2.QuestionsForTheExamCW.exception.*;
+import pro.sky.java.cw2.QuestionsForTheExamCW.exception.BadRequest;
+import pro.sky.java.cw2.QuestionsForTheExamCW.exception.NotFound;
 import pro.sky.java.cw2.QuestionsForTheExamCW.repository.QuestionRepository;
 
 import java.util.Collection;
 
 @RestController
-@RequestMapping(path = "/exam/java")
-public class QuestionController {
-
+@RequestMapping(path = "/exam/math")
+public class MathQuestionController {
     private final QuestionRepository questionRepository;
 
-    public QuestionController(@Qualifier("javaQuestionRepository") QuestionRepository questionRepository) {
+    public MathQuestionController(@Qualifier("mathQuestionRepository") QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
     }
 
