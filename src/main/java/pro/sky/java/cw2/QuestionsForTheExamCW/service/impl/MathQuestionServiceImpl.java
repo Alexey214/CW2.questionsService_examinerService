@@ -18,7 +18,6 @@ public class MathQuestionServiceImpl implements QuestionService {
         this.questionRepository = questionRepository;
     }
 
-
     @Override
     public Question getRandomQuestion() {
         Question questionTmp;
@@ -29,5 +28,20 @@ public class MathQuestionServiceImpl implements QuestionService {
         int rand = random.nextInt(questionRepository.getAll().size());
         List<Question> questionList = questionRepository.getAll().stream().collect(Collectors.toList());
         return questionTmp = questionList.get(rand);
+    }
+
+    @Override
+    public Question add(String question, String answer) {
+        return questionRepository.add(question, answer);
+    }
+
+    @Override
+    public Question remove(Question question) {
+        return questionRepository.remove(question);
+    }
+
+    @Override
+    public Collection<Question> getAll() {
+        return questionRepository.getAll();
     }
 }

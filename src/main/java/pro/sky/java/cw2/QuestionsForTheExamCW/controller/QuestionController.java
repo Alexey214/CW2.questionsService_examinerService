@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.cw2.QuestionsForTheExamCW.data.Question;
 import pro.sky.java.cw2.QuestionsForTheExamCW.exception.*;
 import pro.sky.java.cw2.QuestionsForTheExamCW.repository.QuestionRepository;
+import pro.sky.java.cw2.QuestionsForTheExamCW.service.QuestionService;
 
 import java.util.Collection;
 
@@ -15,21 +16,21 @@ import java.util.Collection;
 @RequestMapping(path = "/exam/java")
 public class QuestionController {
 
-    private final QuestionRepository questionRepository;
+    private final QuestionService questionService;
 
-    public QuestionController(@Qualifier("javaQuestionRepository") QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
+    public QuestionController(@Qualifier("javaQuestionServiceImpl") QuestionService questionService) {
+        this.questionService = questionService;
     }
 
     @GetMapping
     Collection<Question> getQuestions() {
-        return questionRepository.getAll();
+        return questionService.getAll();
     }
 
     @GetMapping(path = "/add")
     Question addQuestion(@RequestParam(name = "question", required = false) String question,
                          @RequestParam(name = "answer", required = false) String answer) {
-        Question questionTmp = questionRepository.add(question, answer);
+        Question questionTmp = questionService.add(question, answer);
         Question questionException = new Question("ОШИБКА", "ОШИБКА");
         if (questionTmp.equals(questionException)) {
             throw new BadRequest();
@@ -43,7 +44,7 @@ public class QuestionController {
                             @RequestParam(name = "answer", required = false) String answer) {
         Question questionTmp = new Question(question, answer);
         Question questionException = new Question("ОШИБКА", "ОШИБКА");
-        if (question == "" && answer == "" || questionRepository.remove(questionTmp).equals(questionException)) {
+        if (question == "" && answer == "" || questionService.remove(questionTmp).equals(questionException)) {
             throw new NotFound();
         } else {
             return questionTmp;
