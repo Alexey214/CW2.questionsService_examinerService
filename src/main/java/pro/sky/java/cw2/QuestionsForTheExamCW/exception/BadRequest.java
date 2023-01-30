@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class BadRequest extends RuntimeException {
     public BadRequest() {
-        System.out.println("\nЗапрошено неверное количество вопросов. \n Повторите запрос, указав корректные данные.");
+        System.out.println("\nУказано неверное количество вопросов/ответов.\nПовторите запрос, указав корректные данные.");
     }
 }
